@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
 import { MyShopsComponent } from './my-shops/my-shops.component';
 import { NewShopComponent } from './new-shop/new-shop.component';
+import { AllShopsComponent } from './all-shops/all-shops.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
     component: NewShopComponent,
     canActivate: [AuthGuard],
     data: { onlySeller: true },
+  },
+  {
+    path: 'shops',
+    component: AllShopsComponent,
   },
 ];
 

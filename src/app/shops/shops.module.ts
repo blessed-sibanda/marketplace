@@ -8,9 +8,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppMaterialModule } from '../app-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MyShopsComponent } from './my-shops/my-shops.component';
+import { AllShopsComponent } from './all-shops/all-shops.component';
 
 @NgModule({
-  declarations: [NewShopComponent, MyShopsComponent],
+  declarations: [NewShopComponent, MyShopsComponent, AllShopsComponent],
   imports: [
     CommonModule,
     ShopsRoutingModule,
