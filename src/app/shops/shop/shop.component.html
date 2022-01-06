@@ -1,0 +1,40 @@
+<div fxLayout="row" fxLayoutAlign="center">
+  <div
+    fxLayout.gt-xs="row"
+    fxLayout.xs="column"
+    fxFlex.lt-md="100%"
+    fxFlex.gt-sm="900px"
+    fxLayoutGap="10px"
+    style="margin: 0 0.75em"
+  >
+    <mat-card style="text-align: center">
+      <mat-card-title class="app-header text-center">{{
+        shop?.name
+      }}</mat-card-title>
+
+      <mat-card-content
+        [style]="media.isActive('sm') ? 'padding: 1em 0' : 'padding: 1.6em'"
+        style="text-align: center"
+      >
+        <img
+          [src]="shop?.imageUrl"
+          style="object-fit: cover; border-radius: 50%"
+          [style]="
+            media.isActive('sm')
+              ? 'width: 140px; height: 140px'
+              : 'width: 200px; height: 200px'
+          "
+          alt=""
+        />
+        <div style="margin-top: 2em">{{ shop?.description }}</div>
+      </mat-card-content>
+    </mat-card>
+    <div fxFlex>
+      <mat-card>
+        <mat-card-header
+          ><mat-card-title>Products</mat-card-title></mat-card-header
+        >
+      </mat-card>
+    </div>
+  </div>
+</div>

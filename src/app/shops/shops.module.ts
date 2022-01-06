@@ -9,9 +9,10 @@ import { AppMaterialModule } from '../app-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MyShopsComponent } from './my-shops/my-shops.component';
 import { AllShopsComponent } from './all-shops/all-shops.component';
+import { ShopComponent } from './shop/shop.component';
 
 @NgModule({
-  declarations: [NewShopComponent, MyShopsComponent, AllShopsComponent],
+  declarations: [NewShopComponent, MyShopsComponent, AllShopsComponent, ShopComponent],
   imports: [
     CommonModule,
     ShopsRoutingModule,

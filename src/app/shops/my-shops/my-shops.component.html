@@ -20,7 +20,13 @@
         <mat-list-item *ngFor="let shop of shops">
           <img mat-list-avatar [src]="shop.imageUrl" alt="" />
 
-          <h4 mat-line>{{ shop.name }}</h4>
+          <h4
+            style="cursor: pointer"
+            [routerLink]="'/shops/' + shop._id"
+            mat-line
+          >
+            {{ shop.name }}
+          </h4>
           <h5 mat-line style="font-size: 13px; color: gray; margin-bottom: 0">
             {{ shop.description }}
           </h5>
