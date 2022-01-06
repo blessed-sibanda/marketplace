@@ -13,6 +13,7 @@ interface IJwtToken {
   id: string;
   iat: string;
   exp: string;
+  seller: boolean;
 }
 
 @Injectable()
@@ -35,6 +36,7 @@ export class CustomAuthService extends AuthService {
     return {
       isAuthenticated: token.email ? true : false,
       userId: token.id,
+      seller: token.seller,
     } as IAuthStatus;
   }
 

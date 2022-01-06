@@ -10,8 +10,13 @@
     >Home</a
   >
 
-  <a fxHide.lt-sm mat-button routerLinkActive="active" routerLink="/users"
-    >Users</a
+  <a
+    fxHide.lt-sm
+    mat-button
+    *ngIf="(authService.currentUser$ | async)?.seller"
+    routerLinkActive="active"
+    routerLink="/users"
+    >My Shops</a
   >
 
   <a

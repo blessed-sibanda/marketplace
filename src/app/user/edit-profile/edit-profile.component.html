@@ -67,6 +67,23 @@
           </mat-form-field>
         </div>
 
+        <div
+          style="margin-top: 1em"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+          fxLayoutGap="10px"
+        >
+          <p>Seller Account</p>
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="8px">
+            <mat-slide-toggle
+              #slideToggle
+              [checked]="this.user.seller"
+              formControlName="seller"
+            ></mat-slide-toggle>
+            <span>{{ slideToggle.checked ? "Active" : "Inactive" }}</span>
+          </div>
+        </div>
+
         <div fxLayout="row" class="margin-top">
           <div *ngIf="updateError" class="mat-caption" style="color: red">
             {{ updateError }}
