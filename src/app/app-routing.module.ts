@@ -16,6 +16,11 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
   },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./shops/shops.module').then((m) => m.ShopsModule),
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 

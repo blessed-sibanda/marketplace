@@ -23,6 +23,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
 import { authFactory } from './auth/auth.factory';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { ShopsModule } from './shops/shops.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
     FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,
+    ShopsModule,
   ],
   providers: [
     {

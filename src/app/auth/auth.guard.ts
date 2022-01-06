@@ -13,6 +13,7 @@ import {
 import { Observable, map, take } from 'rxjs';
 
 import { UiService } from '../common/ui.service';
+import { IUser } from '../user/user';
 import { AuthService, IAuthService, IAuthStatus } from './auth.service';
 
 @Injectable({
@@ -73,6 +74,21 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
           return false;
         }
 
+        this.authService.getCurrentUser().subscribe({
+          next: (currentUser) => {
+            const isSeller = this.checkIsSeller(currentUser, route);
+            if (!isSeller) {
+              this.uiService.showToast(
+                'Only users with seller accounts are allowed to access this page'
+              );
+              this.router.navigate(['/home']);
+              return false;
+            }
+            return true;
+          },
+          error: (err) => this.uiService.showToast(err.message),
+        });
+
         const isOwner = this.checkIsOwner(authStatus, route);
         if (!isOwner) {
           this.uiService.showToast(
@@ -84,6 +100,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
         return true;
       }),
+
       take(1) // the observable must complete for the guard to work
     );
   }
@@ -96,6 +113,13 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       return true;
     }
     return authStatus.userId === route.paramMap.get('userId');
+  }
+
+  private checkIsSeller(currentUser: IUser, route?: ActivatedRouteSnapshot) {
+    if (!route?.data?.['onlySeller']) {
+      return true;
+    }
+    return currentUser.seller;
   }
 
   getResolvedUrl(route?: ActivatedRouteSnapshot): string {
