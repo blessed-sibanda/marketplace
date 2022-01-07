@@ -11,9 +11,16 @@ import { MyShopsComponent } from './my-shops/my-shops.component';
 import { AllShopsComponent } from './all-shops/all-shops.component';
 import { ShopComponent } from './shop/shop.component';
 import { EditShopComponent } from './edit-shop/edit-shop.component';
+import { ShopResolve } from './shop.resolve';
 
 @NgModule({
-  declarations: [NewShopComponent, MyShopsComponent, AllShopsComponent, ShopComponent, EditShopComponent],
+  declarations: [
+    NewShopComponent,
+    MyShopsComponent,
+    AllShopsComponent,
+    ShopComponent,
+    EditShopComponent,
+  ],
   imports: [
     CommonModule,
     ShopsRoutingModule,
@@ -22,5 +29,6 @@ import { EditShopComponent } from './edit-shop/edit-shop.component';
     AppMaterialModule,
     ReactiveFormsModule,
   ],
+  providers: [ShopResolve],
 })
 export class ShopsModule {}

@@ -7,7 +7,6 @@ import { take } from 'rxjs';
 import { dataURLtoFile } from 'src/app/common/common';
 import { UiService } from 'src/app/common/ui.service';
 import { NameValidation } from 'src/app/common/validations';
-import { SubSink } from 'subsink';
 import { Shop } from '../shop';
 import { IShopData, ShopService } from '../shop.service';
 
@@ -16,10 +15,9 @@ import { IShopData, ShopService } from '../shop.service';
   templateUrl: './edit-shop.component.html',
   styleUrls: ['./edit-shop.component.scss'],
 })
-export class EditShopComponent implements OnInit, OnDestroy {
-  shop!: Shop;
+export class EditShopComponent implements OnInit {
+  shop = new Shop();
   shopForm!: FormGroup;
-  subs = new SubSink();
   @ViewChild('autosize') autosize!: CdkTextareaAutosize;
   image: any | undefined | null;
 
@@ -38,10 +36,6 @@ export class EditShopComponent implements OnInit, OnDestroy {
     height: '150px',
     hideDownloadBtn: true,
   };
-
-  ngOnDestroy(): void {
-    this.subs.unsubscribe();
-  }
 
   triggerResize() {
     // Wait for changes to be applied, then trigger textarea resize.
@@ -74,29 +68,17 @@ export class EditShopComponent implements OnInit, OnDestroy {
     let shopData = submittedForm.value as IShopData;
 
     shopData.file = this.image;
-    console.log(shopData);
-    this.subs.add(
-      this.shopService.updateShop(this.shop._id, shopData).subscribe({
-        next: (res) => {
-          this.uiService.showToast('Shop updated successfully!');
-        },
-        error: (err) => this.uiService.showToast(err.message),
-      })
-    );
+
+    this.shopService.updateShop(this.shop._id, shopData).subscribe({
+      next: (res) => {
+        this.uiService.showToast('Shop updated successfully!');
+      },
+      error: (err) => this.uiService.showToast(err.message),
+    });
   }
 
   syncData() {
-    this.subs.add(
-      this.route.params.subscribe({
-        next: (params) => {
-          this.shopService.getShop(params['shopId']).subscribe({
-            next: (res) => {
-              this.shop = res;
-              this.buildForm();
-            },
-          });
-        },
-      })
-    );
+    this.shop = this.route.snapshot.data['shop'];
+    this.buildForm();
   }
 }

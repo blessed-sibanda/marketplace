@@ -10,6 +10,7 @@
     <mat-card fxFlex.gt-xs="40%" style="text-align: center">
       <mat-card-content>
         <h1 class="app-header text-center">Edit Shop</h1>
+
         <div
           fxLayout="row"
           style="margin-bottom: 1.5em"
@@ -85,9 +86,19 @@
     </mat-card>
 
     <mat-card fxFlex.gt-xs="60%">
-      <mat-card-header
-        ><mat-card-title>Products</mat-card-title></mat-card-header
-      >
+      <mat-card-content>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <h1 class="app-header text-center">Products</h1>
+          <button
+            [routerLink]="'/products/' + shop._id + '/new'"
+            color="primary"
+            mat-raised-button
+          >
+            <mat-icon>add_box</mat-icon>
+            <span>New Product</span>
+          </button>
+        </div>
+      </mat-card-content>
     </mat-card>
   </div>
 </div>
