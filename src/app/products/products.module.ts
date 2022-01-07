@@ -8,9 +8,10 @@ import { NgpImagePickerModule } from 'ngp-image-picker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ShopResolve } from '../shops/shop.resolve';
+import { SuggestionsComponent } from './suggestions/suggestions.component';
 
 @NgModule({
-  declarations: [NewProductComponent],
+  declarations: [NewProductComponent, SuggestionsComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,

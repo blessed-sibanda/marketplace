@@ -9,6 +9,7 @@ export interface IProduct {
   category: string;
   price: number;
   quantity: number;
+  createdAt: string;
 }
 
 export class Product implements IProduct {
@@ -20,7 +21,8 @@ export class Product implements IProduct {
     public shop: IShop = new Shop(),
     public price = 0,
     public quantity = 0,
-    public category = ''
+    public category = '',
+    public createdAt = ''
   ) {}
 
   static Build(product: IProduct): Product {
@@ -32,7 +34,8 @@ export class Product implements IProduct {
       product.shop,
       product.price,
       product.quantity,
-      product.category
+      product.category,
+      product.createdAt
     );
   }
 

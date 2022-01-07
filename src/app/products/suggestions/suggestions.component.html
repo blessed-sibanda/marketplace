@@ -1,0 +1,26 @@
+<h2>{{ title }}</h2>
+<mat-card *ngFor="let product of products">
+  <span fxLayout="row">
+    <img
+      mat-card-image
+      [src]="
+        product.imageUrl ? product.imageUrl : '../../../assets/product4.png'
+      "
+      alt=""
+    />
+    <mat-card-content>
+      <a class="mat-h3">{{ product.name }}</a>
+      <a class="mat-h4">
+        <mat-icon>shopping_basket</mat-icon>
+        <span>{{ product.shop.name }}</span>
+      </a>
+      <p>Added on {{ product.createdAt | date: "mediumDate" }}</p>
+      <div fxLayout="row">
+        <p>{{ product.price | currency }}</p>
+        <div class="flex-spacer"></div>
+        <mat-icon>visibility</mat-icon>
+        <mat-icon>add_shopping_cart</mat-icon>
+      </div>
+    </mat-card-content>
+  </span>
+</mat-card>
