@@ -9,19 +9,15 @@ import { AppMaterialModule } from '../app-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MyShopsComponent } from './my-shops/my-shops.component';
 import { AllShopsComponent } from './all-shops/all-shops.component';
-import { ShopComponent } from './shop/shop.component';
 import { EditShopComponent } from './edit-shop/edit-shop.component';
 import { ShopResolve } from './shop.resolve';
-import { ProductListComponent } from '../products/product-list/product-list.component';
 
 @NgModule({
   declarations: [
     NewShopComponent,
     MyShopsComponent,
     AllShopsComponent,
-    ShopComponent,
     EditShopComponent,
-    ProductListComponent,
   ],
   imports: [
     CommonModule,

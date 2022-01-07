@@ -26,6 +26,9 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { ShopsModule } from './shops/shops.module';
 import { SuggestionsComponent } from './products/suggestions/suggestions.component';
 import { ProductComponent } from './products/product/product.component';
+import { SearchComponent } from './products/search/search.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
+import { ShopComponent } from './shops/shop/shop.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { ProductComponent } from './products/product/product.component';
     SimpleDialogComponent,
     SuggestionsComponent,
     ProductComponent,
+    SearchComponent,
+    ProductListComponent,
+    ShopComponent,
   ],
   imports: [
     HttpClientModule,

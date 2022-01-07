@@ -32,7 +32,14 @@
       </mat-card>
     </div>
     <div fxFlex>
-      <app-product-list [products]="products"></app-product-list>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title class="app-header">Products</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <app-product-list [products]="products"></app-product-list>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>

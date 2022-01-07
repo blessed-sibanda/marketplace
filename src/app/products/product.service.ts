@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { transformError } from '../common/common';
 import { IProduct, Product } from './product';
@@ -20,6 +20,7 @@ export interface IProductQuery {
 }
 
 interface IProductService {
+  products$: BehaviorSubject<Product[]>;
   createProduct(shopId: string, data: IProductData): Observable<Product>;
   updateProduct(
     shopId: string,
@@ -41,14 +42,20 @@ interface IProductService {
 export class ProductService implements IProductService {
   constructor(private httpClient: HttpClient) {}
 
+  products$ = new BehaviorSubject<Product[]>([]);
+
   searchProducts(query: IProductQuery): Observable<Product[]> {
-    const params = new HttpParams();
-    if (query.search) params.set('search', query.search);
-    if (query.category) params.set('category', query.category);
+    const params = new HttpParams()
+      .set('search', query.search ?? '')
+      .set('category', query.category ?? '');
 
     return this.httpClient
       .get<IProduct[]>(`${environment.baseApiUrl}/products`, { params })
-      .pipe(map(Product.BuildMany), catchError(transformError));
+      .pipe(
+        map(Product.BuildMany),
+        tap((p) => this.products$.next(p)),
+        catchError(transformError)
+      );
   }
 
   listCategories(): Observable<string[]> {

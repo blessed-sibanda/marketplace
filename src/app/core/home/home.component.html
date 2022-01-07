@@ -1,11 +1,12 @@
 <div
-  fxLayout.gt-xs="row"
-  fxLayout.xs="column"
+  fxLayout.gt-sm="row"
+  fxLayout.lt-md="column"
   fxLayoutGap="24px"
   style="max-width: 1080px; margin: 0 auto; padding: 0 1em"
 >
   <div fxFlex.sm="60%" fxFlex.gt-sm="65%">
-    <mat-card> </mat-card>
+    <app-search></app-search>
+    <app-product-list [products]="searchResults"></app-product-list>
   </div>
   <div fxFlex.sm="40%" fxFlex.gt-sm="35%">
     <div
