@@ -24,6 +24,8 @@ import { AuthHttpInterceptor } from './auth/auth-http-interceptor';
 import { authFactory } from './auth/auth.factory';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { ShopsModule } from './shops/shops.module';
+import { SuggestionsComponent } from './products/suggestions/suggestions.component';
+import { ProductComponent } from './products/product/product.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { ShopsModule } from './shops/shops.module';
     SideNavigationComponent,
     SignUpComponent,
     SimpleDialogComponent,
+    SuggestionsComponent,
+    ProductComponent,
   ],
   imports: [
     HttpClientModule,

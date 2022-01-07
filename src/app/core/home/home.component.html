@@ -1,11 +1,20 @@
-<div fxLayout="row" fxLayoutAlign="center">
-  <mat-card fxFlex.xs="96%" fxFlex.gt-xs="600px">
-    <mat-card-content>
-      <mat-card-subtitle class="app-header"
-        ><h2>Home Page</h2>
-      </mat-card-subtitle>
-      <img mat-card-image src="../../../assets/home.jpg" alt="" />
-      <p class="mat-body-2">Welcome to the MEAN Skeleton home page</p>
-    </mat-card-content>
-  </mat-card>
+<div
+  fxLayout.gt-xs="row"
+  fxLayout.xs="column"
+  fxLayoutGap="24px"
+  style="max-width: 1080px; margin: 0 auto; padding: 0 1em"
+>
+  <div fxFlex.sm="60%" fxFlex.gt-sm="65%">
+    <mat-card> </mat-card>
+  </div>
+  <div fxFlex.sm="40%" fxFlex.gt-sm="35%">
+    <div
+      style="background-color: #b1a9b12b; padding: 1em; border-radius: 0.4em"
+    >
+      <app-suggestions
+        title="Latest Products"
+        [products]="latestProducts"
+      ></app-suggestions>
+    </div>
+  </div>
 </div>
