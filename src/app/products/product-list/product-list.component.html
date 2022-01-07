@@ -25,9 +25,7 @@
           {{ product.price | currency }}
         </h4>
         <div class="flex-spacer"></div>
-        <button mat-icon-button color="primary">
-          <mat-icon>add_shopping_cart</mat-icon>
-        </button>
+        <app-add-to-cart [product]="product"></app-add-to-cart>
       </mat-grid-tile-footer>
     </mat-grid-tile>
   </mat-grid-list>

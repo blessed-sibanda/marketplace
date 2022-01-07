@@ -30,6 +30,7 @@ import { SearchComponent } from './products/search/search.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ShopComponent } from './shops/shop/shop.component';
 import { CartModule } from './cart/cart.module';
+import { AddToCartComponent } from './cart/add-to-cart/add-to-cart.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { CartModule } from './cart/cart.module';
     SearchComponent,
     ProductListComponent,
     ShopComponent,
+    AddToCartComponent,
   ],
   imports: [
     HttpClientModule,
@@ -57,7 +59,6 @@ import { CartModule } from './cart/cart.module';
     ReactiveFormsModule,
     FormsModule,
     ShopsModule,
-    CartModule,
   ],
   providers: [
     {

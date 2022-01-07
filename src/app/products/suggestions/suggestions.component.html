@@ -31,7 +31,8 @@
           <span>{{ product.shop.name }}</span>
         </span>
         <p style="margin: 0; padding: 0.2em 0; font-size: 0.75rem; color: gray">
-          Added on {{ product.createdAt | date: "mediumDate" }}
+          Added on {{ product.createdAt | date: "shortDate" }}
+          {{ product.createdAt | date: "shortTime" }}
         </p>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <p style="margin: 0; padding: 0">{{ product.price | currency }}</p>
@@ -43,9 +44,7 @@
             >
               <mat-icon>visibility</mat-icon>
             </button>
-            <button color="accent" mat-icon-button>
-              <mat-icon>add_shopping_cart</mat-icon>
-            </button>
+            <app-add-to-cart [product]="product"></app-add-to-cart>
           </span>
         </div>
       </mat-card-content>

@@ -1,0 +1,8 @@
+<button
+  [color]="product.quantity > 0 ? 'primary' : ''"
+  [disabled]="product.quantity == 0"
+  mat-icon-button
+>
+  <mat-icon *ngIf="product.quantity > 0">add_shopping_cart</mat-icon>
+  <mat-icon *ngIf="product.quantity == 0">remove_shopping_cart</mat-icon>
+</button>
