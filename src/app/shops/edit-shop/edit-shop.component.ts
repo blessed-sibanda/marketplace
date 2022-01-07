@@ -88,4 +88,26 @@ export class EditShopComponent implements OnInit {
       .listProductsByShop(this.shop._id)
       .subscribe({ next: (res) => (this.products = res) });
   }
+
+  deleteProduct(product: Product) {
+    const dialog = this.uiService.showDialog(
+      'Delete Product',
+      `Confirm to delete product: '${product.name}'`,
+      'Confirm',
+      'Cancel'
+    );
+    dialog.subscribe((result) => {
+      if (result) {
+        this.productService
+          .deleteProduct(product.shop._id, product._id)
+          .subscribe({
+            next: () => {
+              this.uiService.showToast('Product deleted successfully');
+              this.products = this.products.filter((p) => p._id != product._id);
+            },
+            error: (err) => this.uiService.showToast(err.message),
+          });
+      }
+    });
+  }
 }

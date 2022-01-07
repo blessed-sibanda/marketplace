@@ -134,7 +134,11 @@
               >
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button color="accent">
+              <button
+                (click)="deleteProduct(product)"
+                mat-icon-button
+                color="accent"
+              >
                 <mat-icon>delete</mat-icon>
               </button>
               <mat-divider></mat-divider>

@@ -21,6 +21,7 @@ interface IProductService {
     productId: string,
     data: IProductData
   ): Observable<Product>;
+  deleteProduct(shopId: string, productId: string): Observable<void>;
   getProduct(productId: string): Observable<Product>;
   listProductsByShop(shopId: string): Observable<Product[]>;
   latestProducts(): Observable<Product[]>;
@@ -32,6 +33,14 @@ interface IProductService {
 })
 export class ProductService implements IProductService {
   constructor(private httpClient: HttpClient) {}
+
+  deleteProduct(shopId: string, productId: string): Observable<void> {
+    return this.httpClient
+      .delete<void>(
+        `${environment.baseApiUrl}/products/${shopId}/product/${productId}`
+      )
+      .pipe(catchError(transformError));
+  }
 
   updateProduct(
     shopId: string,
