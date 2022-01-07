@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MediaObserver } from '@angular/flex-layout';
 import { combineLatest, tap } from 'rxjs';
 import { Product } from 'src/app/products/product';
 import {
@@ -19,7 +20,10 @@ export class HomeComponent implements OnInit {
   products: Product[] = [];
   query: IProductQuery = { search: '', category: '' };
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    public media: MediaObserver
+  ) {}
 
   ngOnInit(): void {
     this.syncData();

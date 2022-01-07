@@ -2,7 +2,8 @@
   fxLayout.gt-sm="row"
   fxLayout.lt-md="column"
   fxLayoutGap="24px"
-  style="max-width: 1080px; margin: 0 auto; padding: 0 1em"
+  style="margin: 0 auto; padding: 0 1em"
+  [style]="media.isActive('lt-md') ? 'max-width: 700px' : 'max-width: 1080px'"
 >
   <div fxFlex.sm="60%" fxFlex.gt-sm="65%">
     <div
