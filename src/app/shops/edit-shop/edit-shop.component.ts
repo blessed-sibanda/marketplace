@@ -7,6 +7,8 @@ import { take } from 'rxjs';
 import { dataURLtoFile } from 'src/app/common/common';
 import { UiService } from 'src/app/common/ui.service';
 import { NameValidation } from 'src/app/common/validations';
+import { Product } from 'src/app/products/product';
+import { ProductService } from 'src/app/products/product.service';
 import { Shop } from '../shop';
 import { IShopData, ShopService } from '../shop.service';
 
@@ -20,13 +22,15 @@ export class EditShopComponent implements OnInit {
   shopForm!: FormGroup;
   @ViewChild('autosize') autosize!: CdkTextareaAutosize;
   image: any | undefined | null;
+  products: Product[] = [];
 
   constructor(
     private shopService: ShopService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private _ngZone: NgZone,
-    private uiService: UiService
+    private uiService: UiService,
+    private productService: ProductService
   ) {}
 
   imagePickerConf: ImagePickerConf = {
@@ -80,5 +84,8 @@ export class EditShopComponent implements OnInit {
   syncData() {
     this.shop = this.route.snapshot.data['shop'];
     this.buildForm();
+    this.productService
+      .listProductsByShop(this.shop._id)
+      .subscribe({ next: (res) => (this.products = res) });
   }
 }

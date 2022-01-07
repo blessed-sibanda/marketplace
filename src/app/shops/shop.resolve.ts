@@ -5,7 +5,6 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from '../auth/auth.service';
 import { IShop } from './shop';
 import { ShopService } from './shop.service';
 

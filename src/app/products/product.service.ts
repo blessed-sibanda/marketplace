@@ -16,6 +16,7 @@ export interface IProductData {
 
 interface IProductService {
   createProduct(shopId: string, data: IProductData): Observable<Product>;
+  listProductsByShop(shopId: string): Observable<Product[]>;
 }
 
 @Injectable({
@@ -23,6 +24,12 @@ interface IProductService {
 })
 export class ProductService implements IProductService {
   constructor(private httpClient: HttpClient) {}
+
+  listProductsByShop(shopId: string): Observable<Product[]> {
+    return this.httpClient
+      .get<IProduct[]>(`${environment.baseApiUrl}/products/${shopId}`)
+      .pipe(map(Product.BuildMany), catchError(transformError));
+  }
 
   createProduct(shopId: string, data: IProductData): Observable<Product> {
     let formData = new FormData();
