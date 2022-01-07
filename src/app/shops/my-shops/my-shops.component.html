@@ -42,6 +42,7 @@
           <button
             *ngIf="shop.owner._id === currentUser._id"
             color="accent"
+            (click)="deleteShop(shop)"
             mat-icon-button
           >
             <mat-icon>delete</mat-icon>

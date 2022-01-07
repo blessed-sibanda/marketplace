@@ -17,6 +17,7 @@ interface IShopService {
   listShops(): Observable<Shop[]>;
   getShop(shopId: string): Observable<Shop>;
   updateShop(shopId: string, data: IShopData): Observable<Shop>;
+  deleteShop(shopId: string): Observable<void>;
 }
 
 @Injectable({
@@ -24,6 +25,12 @@ interface IShopService {
 })
 export class ShopService implements IShopService {
   constructor(private httpClient: HttpClient) {}
+
+  deleteShop(shopId: string): Observable<void> {
+    return this.httpClient.delete<void>(
+      `${environment.baseApiUrl}/shops/${shopId}`
+    );
+  }
 
   updateShop(shopId: string, data: IShopData): Observable<Shop> {
     let formData = new FormData();

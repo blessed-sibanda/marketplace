@@ -3,7 +3,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { UiService } from 'src/app/common/ui.service';
 import { User } from 'src/app/user/user';
 import { SubSink } from 'subsink';
-import { Shop } from '../shop';
+import { IShop, Shop } from '../shop';
 import { ShopService } from '../shop.service';
 
 @Component({
@@ -33,6 +33,26 @@ export class MyShopsComponent implements OnInit {
           error: (err) => this.uiService.showToast(err.message),
         });
       },
+    });
+  }
+
+  deleteShop(shop: Shop) {
+    const dialog = this.uiService.showDialog(
+      'Delete Shop',
+      `Confirm to delete shop: '${shop.name}'`,
+      'Confirm',
+      'Cancel'
+    );
+    this.subs.sink = dialog.subscribe((result) => {
+      if (result) {
+        this.shopService.deleteShop(shop._id).subscribe({
+          next: () => {
+            this.uiService.showToast('Shop deleted successfully');
+            this.shops = this.shops.filter((s) => s._id != shop._id);
+          },
+          error: (err) => this.uiService.showToast(err.message),
+        });
+      }
     });
   }
 }
