@@ -14,9 +14,7 @@
               {{ product.quantity > 0 ? "In Stock" : "Out of Stock" }}
             </p>
           </div>
-          <button class="mat-elevation-z1" color="primary" mat-raised-button>
-            <mat-icon color="accent">add_shopping_cart</mat-icon>
-          </button>
+          <app-add-to-cart [product]="product"></app-add-to-cart>
         </span>
         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
           <img

@@ -31,10 +31,11 @@ export class CartService extends CacheService implements ICartService {
   }
 
   private get items() {
-    return this.items$.getValue();
+    return this.items$.getValue() || [];
   }
 
   get count() {
+    if (!this.items || this.items.length == 0) return 0;
     return this.items.reduce((a, b) => a + b.quantity, 0);
   }
 
