@@ -32,7 +32,7 @@ export class ShopService implements IShopService {
     data.file && formData.append('file', data.file);
 
     return this.httpClient
-      .put<IShop>(`${environment.baseApiUrl}/shops/${shopId}`, data)
+      .put<IShop>(`${environment.baseApiUrl}/shops/${shopId}`, formData)
       .pipe(map(Shop.Build), catchError(transformError));
   }
 

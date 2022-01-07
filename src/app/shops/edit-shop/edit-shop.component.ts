@@ -71,11 +71,12 @@ export class EditShopComponent implements OnInit, OnDestroy {
   }
 
   updateShop(submittedForm: FormGroup) {
-    let courseData = submittedForm.value as IShopData;
+    let shopData = submittedForm.value as IShopData;
 
-    courseData.file = this.image;
+    shopData.file = this.image;
+    console.log(shopData);
     this.subs.add(
-      this.shopService.updateShop(this.shop._id, courseData).subscribe({
+      this.shopService.updateShop(this.shop._id, shopData).subscribe({
         next: (res) => {
           this.uiService.showToast('Shop updated successfully!');
         },
