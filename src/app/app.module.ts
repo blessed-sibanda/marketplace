@@ -29,6 +29,7 @@ import { ProductComponent } from './products/product/product.component';
 import { SearchComponent } from './products/search/search.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ShopComponent } from './shops/shop/shop.component';
+import { CartModule } from './cart/cart.module';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ShopComponent } from './shops/shop/shop.component';
     ReactiveFormsModule,
     FormsModule,
     ShopsModule,
+    CartModule,
   ],
   providers: [
     {
