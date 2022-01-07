@@ -1,0 +1,12 @@
+.product-img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: solid thin rgba(163, 156, 156, 0.247);
+
+  &:hover {
+    transform: scaleY(1.06);
+  }
+}

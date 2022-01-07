@@ -44,6 +44,7 @@
           <mat-grid-tile *ngFor="let product of products">
             <img
               class="product-img"
+              [routerLink]="'/products/product/' + product._id"
               [src]="
                 product.imageUrl
                   ? product.imageUrl
@@ -52,9 +53,13 @@
               alt=""
             />
             <mat-grid-tile-footer>
-              <h2 style="font-weight: 500; font-size: 16px" mat-line>
+              <h3
+                [routerLink]="'/products/product/' + product._id"
+                style="font-weight: 500; font-size: 16px; cursor: pointer"
+                mat-line
+              >
                 {{ product.name }}
-              </h2>
+              </h3>
               <h4 style="font-size: 15px" mat-line>
                 {{ product.price | currency }}
               </h4>

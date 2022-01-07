@@ -9,9 +9,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ShopResolve } from '../shops/shop.resolve';
 import { SuggestionsComponent } from './suggestions/suggestions.component';
+import { ProductComponent } from './product/product.component';
+import { ProductResolve } from './product.resolve';
 
 @NgModule({
-  declarations: [NewProductComponent, SuggestionsComponent],
+  declarations: [NewProductComponent, SuggestionsComponent, ProductComponent],
   imports: [
     CommonModule,
     ProductsRoutingModule,
@@ -20,6 +22,6 @@ import { SuggestionsComponent } from './suggestions/suggestions.component';
     ReactiveFormsModule,
     FlexLayoutModule,
   ],
-  providers: [ShopResolve],
+  providers: [ShopResolve, ProductResolve],
 })
 export class ProductsModule {}

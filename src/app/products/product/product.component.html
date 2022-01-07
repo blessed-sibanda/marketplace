@@ -1,0 +1,64 @@
+<div
+  fxLayout.gt-xs="row"
+  fxLayout.xs="column"
+  fxLayoutGap="24px"
+  style="max-width: 1080px; margin: 0 auto; padding: 0 1em"
+>
+  <div fxFlex.sm="60%" fxFlex.gt-sm="65%">
+    <mat-card>
+      <mat-card-content>
+        <span fxLayout="row" fxLayoutAlign="space-between center">
+          <div>
+            <h1 style="margin-bottom: 0">{{ product.name }}</h1>
+            <small>{{
+              product.quantity > 0 ? "In Stock" : "Out of Stock"
+            }}</small>
+          </div>
+          <button class="mat-elevation-z1" color="primary" mat-raised-button>
+            <mat-icon color="accent">add_shopping_cart</mat-icon>
+          </button>
+        </span>
+        <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="16px">
+          <img
+            class="product-img"
+            [src]="
+              product.imageUrl
+                ? product.imageUrl
+                : '../../../assets/product4.png'
+            "
+            alt=""
+          />
+          <div fxFlex fxLayout="column">
+            <div *ngIf="product.description" style="padding-top: 2em">
+              {{ product.description }}
+            </div>
+            <div
+              style="
+                background-color: rgba(143, 188, 143, 0.226);
+                padding: 1em 0.5em;
+                margin: 1em 0;
+                border-radius: 3px;
+              "
+            >
+              {{ product.price | currency }}
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="6px">
+              <mat-icon>shopping_basket</mat-icon>
+              <span>{{ product.shop.name }}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div
+    fxFlex.sm="40%"
+    fxFlex.gt-sm="35%"
+    style="background-color: #b1a9b12b; padding: 1em; border-radius: 0.4em"
+  >
+    <app-suggestions
+      title="Related Products"
+      [products]="relatedProducts"
+    ></app-suggestions>
+  </div>
+</div>
