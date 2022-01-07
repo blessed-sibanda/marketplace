@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-header><mat-card-title>Products</mat-card-title></mat-card-header>
+  <mat-grid-list
+    [cols]="media.isActive('gt-sm') ? 3 : media.isActive('sm') ? 2 : 1"
+    gutterSize="10px"
+    rowHeight="200"
+  >
+    <mat-grid-tile *ngFor="let product of products">
+      <img
+        class="product-img"
+        [routerLink]="'/products/product/' + product._id"
+        [src]="
+          product.imageUrl ? product.imageUrl : '../../../assets/product4.png'
+        "
+        alt=""
+      />
+      <mat-grid-tile-footer>
+        <h3
+          [routerLink]="'/products/product/' + product._id"
+          style="font-weight: 500; font-size: 16px; cursor: pointer"
+          mat-line
+        >
+          {{ product.name }}
+        </h3>
+        <h4 style="font-size: 15px" mat-line>
+          {{ product.price | currency }}
+        </h4>
+        <div class="flex-spacer"></div>
+        <button mat-icon-button color="primary">
+          <mat-icon>add_shopping_cart</mat-icon>
+        </button>
+      </mat-grid-tile-footer>
+    </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>

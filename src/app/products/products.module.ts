@@ -14,7 +14,12 @@ import { ProductResolve } from './product.resolve';
 import { EditProductComponent } from './edit-product/edit-product.component';
 
 @NgModule({
-  declarations: [NewProductComponent, SuggestionsComponent, ProductComponent, EditProductComponent],
+  declarations: [
+    NewProductComponent,
+    SuggestionsComponent,
+    ProductComponent,
+    EditProductComponent,
+  ],
   imports: [
     CommonModule,
     ProductsRoutingModule,

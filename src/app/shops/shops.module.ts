@@ -12,6 +12,7 @@ import { AllShopsComponent } from './all-shops/all-shops.component';
 import { ShopComponent } from './shop/shop.component';
 import { EditShopComponent } from './edit-shop/edit-shop.component';
 import { ShopResolve } from './shop.resolve';
+import { ProductListComponent } from '../products/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ShopResolve } from './shop.resolve';
     AllShopsComponent,
     ShopComponent,
     EditShopComponent,
+    ProductListComponent,
   ],
   imports: [
     CommonModule,

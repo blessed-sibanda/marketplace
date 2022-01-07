@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -14,6 +14,11 @@ export interface IProductData {
   file?: File;
 }
 
+export interface IProductQuery {
+  search?: string;
+  category?: string;
+}
+
 interface IProductService {
   createProduct(shopId: string, data: IProductData): Observable<Product>;
   updateProduct(
@@ -26,6 +31,8 @@ interface IProductService {
   listProductsByShop(shopId: string): Observable<Product[]>;
   latestProducts(): Observable<Product[]>;
   relatedProducts(productId: string): Observable<Product[]>;
+  listCategories(): Observable<string[]>;
+  searchProducts(query: IProductQuery): Observable<Product[]>;
 }
 
 @Injectable({
@@ -33,6 +40,22 @@ interface IProductService {
 })
 export class ProductService implements IProductService {
   constructor(private httpClient: HttpClient) {}
+
+  searchProducts(query: IProductQuery): Observable<Product[]> {
+    const params = new HttpParams();
+    if (query.search) params.set('search', query.search);
+    if (query.category) params.set('category', query.category);
+
+    return this.httpClient
+      .get<IProduct[]>(`${environment.baseApiUrl}/products`, { params })
+      .pipe(map(Product.BuildMany), catchError(transformError));
+  }
+
+  listCategories(): Observable<string[]> {
+    return this.httpClient
+      .get<string[]>(`${environment.baseApiUrl}/products/categories`)
+      .pipe(catchError(transformError));
+  }
 
   deleteProduct(shopId: string, productId: string): Observable<void> {
     return this.httpClient
