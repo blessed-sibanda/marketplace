@@ -7,7 +7,6 @@
     <span fxLayout="row" fxLayoutGap="10px" style="margin: 0; padding: 0">
       <img
         class="product-img"
-        [routerLink]="'/products/product/' + product._id"
         [src]="
           product.imageUrl ? product.imageUrl : '../../../assets/product4.png'
         "
@@ -31,13 +30,17 @@
           <mat-icon>shopping_basket</mat-icon>
           <span>{{ product.shop.name }}</span>
         </span>
-        <p style="margin: 0; padding: 0.2em 0">
+        <p style="margin: 0; padding: 0.2em 0; font-size: 0.75rem; color: gray">
           Added on {{ product.createdAt | date: "mediumDate" }}
         </p>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <p style="margin: 0; padding: 0">{{ product.price | currency }}</p>
           <span>
-            <button color="accent" mat-icon-button>
+            <button
+              [routerLink]="'/products/product/' + product._id"
+              color="accent"
+              mat-icon-button
+            >
               <mat-icon>visibility</mat-icon>
             </button>
             <button color="accent" mat-icon-button>

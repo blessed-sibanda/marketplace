@@ -54,6 +54,7 @@
   </div>
   <div fxFlex.sm="40%" fxFlex.gt-sm="35%">
     <div
+      *ngIf="relatedProducts.length > 0"
       style="background-color: #b1a9b12b; padding: 1em; border-radius: 0.4em"
     >
       <app-suggestions

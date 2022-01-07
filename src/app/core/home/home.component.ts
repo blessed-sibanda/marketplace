@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
-import { combineLatest, tap } from 'rxjs';
+import { combineLatest, Observable, tap } from 'rxjs';
 import { Product } from 'src/app/products/product';
 import {
   IProductQuery,
@@ -16,8 +16,10 @@ import { SubSink } from 'subsink';
 export class HomeComponent implements OnInit {
   latestProducts: Product[] = [];
   searchResults: Product[] = [];
+  categories: string[] = [];
   subs = new SubSink();
-  products: Product[] = [];
+  filteredProducts: Product[] = [];
+  categoryIndex = 0;
   query: IProductQuery = { search: '', category: '' };
 
   constructor(
@@ -27,18 +29,32 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.syncData();
-    this.subs.sink = combineLatest([this.productService.products$])
-      .pipe(
-        tap(([searchResults]) => {
-          this.searchResults = searchResults;
-        })
+  }
+
+  getCategoryProducts() {
+    this.productService
+      .listProductsByCategory(
+        this.categoryIndex == 0 ? '' : this.categories[this.categoryIndex - 1]
       )
-      .subscribe();
+      .subscribe({ next: (res) => (this.filteredProducts = res) });
   }
 
   syncData() {
+    this.getCategoryProducts();
     this.productService
       .latestProducts()
       .subscribe({ next: (res) => (this.latestProducts = res) });
+    this.productService.products$.next([]);
+    this.subs.sink = combineLatest([
+      this.productService.products$,
+      this.productService.listCategories(),
+    ])
+      .pipe(
+        tap(([searchResults, categories]) => {
+          this.searchResults = searchResults;
+          this.categories = categories.filter((c) => c != '');
+        })
+      )
+      .subscribe();
   }
 }

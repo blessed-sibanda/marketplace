@@ -21,6 +21,7 @@ export interface IProductQuery {
 
 interface IProductService {
   products$: BehaviorSubject<Product[]>;
+  categoryProducts$: BehaviorSubject<Product[]>;
   createProduct(shopId: string, data: IProductData): Observable<Product>;
   updateProduct(
     shopId: string,
@@ -34,6 +35,7 @@ interface IProductService {
   relatedProducts(productId: string): Observable<Product[]>;
   listCategories(): Observable<string[]>;
   searchProducts(query: IProductQuery): Observable<Product[]>;
+  listProductsByCategory(category: string): Observable<Product[]>;
 }
 
 @Injectable({
@@ -41,6 +43,16 @@ interface IProductService {
 })
 export class ProductService implements IProductService {
   constructor(private httpClient: HttpClient) {}
+
+  categoryProducts$ = new BehaviorSubject<Product[]>([]);
+
+  listProductsByCategory(category: string): Observable<Product[]> {
+    const params = new HttpParams().set('category', category);
+
+    return this.httpClient
+      .get<IProduct[]>(`${environment.baseApiUrl}/products`, { params })
+      .pipe(map(Product.BuildMany), catchError(transformError));
+  }
 
   products$ = new BehaviorSubject<Product[]>([]);
 
@@ -51,11 +63,7 @@ export class ProductService implements IProductService {
 
     return this.httpClient
       .get<IProduct[]>(`${environment.baseApiUrl}/products`, { params })
-      .pipe(
-        map(Product.BuildMany),
-        tap((p) => this.products$.next(p)),
-        catchError(transformError)
-      );
+      .pipe(map(Product.BuildMany), catchError(transformError));
   }
 
   listCategories(): Observable<string[]> {

@@ -7,7 +7,7 @@
 >
   <div fxFlex.sm="60%" fxFlex.gt-sm="65%">
     <div
-      class="mat-elevation-z1"
+      class="mat-elevation-z0"
       style="
         background-color: #b1a9b12b;
         margin: 0;
@@ -16,8 +16,36 @@
       "
     >
       <app-search></app-search>
-      <mat-divider></mat-divider>
+      <mat-divider *ngIf="searchResults.length > 0"></mat-divider>
       <app-product-list [products]="searchResults"></app-product-list>
+    </div>
+    <div
+      class="mat-elevation-z0"
+      style="
+        background-color: #b1a9b12b;
+        margin: 1em 0 0;
+        padding: 1em 0 0;
+        border-radius: 0.4em;
+      "
+    >
+      <h3 style="padding: 0 1em">Explore by Category</h3>
+
+      <mat-tab-group
+        [(selectedIndex)]="categoryIndex"
+        (selectedIndexChange)="getCategoryProducts()"
+        dynamicHeight
+      >
+        <mat-tab label="All">
+          <ng-template matTabContent>
+            <app-product-list [products]="filteredProducts"></app-product-list>
+          </ng-template>
+        </mat-tab>
+        <mat-tab *ngFor="let cat of categories" [label]="cat">
+          <ng-template matTabContent>
+            <app-product-list [products]="filteredProducts"></app-product-list>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
   <div fxFlex.sm="40%" fxFlex.gt-sm="35%">

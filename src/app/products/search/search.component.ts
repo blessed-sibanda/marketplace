@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, tap } from 'rxjs';
 import { SubSink } from 'subsink';
 import { IProductQuery, ProductService } from '../product.service';
@@ -31,8 +31,13 @@ export class SearchComponent implements OnInit, OnDestroy {
       .pipe(
         debounceTime(100),
         tap((v: IProductQuery) => {
-          if (v.search != '' || v.category != '')
-            this.productService.searchProducts(v).subscribe();
+          if (v.search != '')
+            this.productService
+              .searchProducts(v)
+              .subscribe({
+                next: (res) => this.productService.products$.next(res),
+              });
+          else this.productService.products$.next([]);
         })
       )
       .subscribe();
@@ -46,8 +51,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   syncData() {
-    this.productService
-      .listCategories()
-      .subscribe({ next: (res) => (this.categories = res) });
+    this.productService.listCategories().subscribe({
+      next: (res) => (this.categories = res.filter((c) => c != '')),
+    });
   }
 }
