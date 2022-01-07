@@ -24,23 +24,15 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
-  ngOnInit(): void {
-    this.syncData();
+  clearSearch() {
+    this.productService.products$.next([]);
     this.buildForm();
-    this.subs.sink = this.searchForm.valueChanges
-      .pipe(
-        debounceTime(100),
-        tap((v: IProductQuery) => {
-          if (v.search != '')
-            this.productService
-              .searchProducts(v)
-              .subscribe({
-                next: (res) => this.productService.products$.next(res),
-              });
-          else this.productService.products$.next([]);
-        })
-      )
-      .subscribe();
+    this.syncData();
+  }
+
+  ngOnInit(): void {
+    this.buildForm();
+    this.syncData();
   }
 
   buildForm() {
@@ -54,5 +46,17 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.productService.listCategories().subscribe({
       next: (res) => (this.categories = res.filter((c) => c != '')),
     });
+    this.subs.sink = this.searchForm.valueChanges
+      .pipe(
+        debounceTime(100),
+        tap((v: IProductQuery) => {
+          if (v.search != '')
+            this.productService.searchProducts(v).subscribe({
+              next: (res) => this.productService.products$.next(res),
+            });
+          else this.productService.products$.next([]);
+        })
+      )
+      .subscribe();
   }
 }

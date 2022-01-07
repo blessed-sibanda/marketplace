@@ -19,5 +19,13 @@
       <mat-label>Search Products</mat-label>
       <input matInput formControlName="search" placeholder="Start typing.." />
     </mat-form-field>
+    <button
+      (click)="clearSearch()"
+      *ngIf="searchForm.dirty"
+      color="warn"
+      mat-icon-button
+    >
+      <mat-icon>close</mat-icon>
+    </button>
   </form>
 </div>
