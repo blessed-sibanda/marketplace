@@ -10,9 +10,9 @@
         <span fxLayout="row" fxLayoutAlign="space-between center">
           <div>
             <h1 style="margin-bottom: 0">{{ product.name }}</h1>
-            <small>{{
-              product.quantity > 0 ? "In Stock" : "Out of Stock"
-            }}</small>
+            <p class="mat-caption">
+              {{ product.quantity > 0 ? "In Stock" : "Out of Stock" }}
+            </p>
           </div>
           <button class="mat-elevation-z1" color="primary" mat-raised-button>
             <mat-icon color="accent">add_shopping_cart</mat-icon>
@@ -33,9 +33,10 @@
               {{ product.description }}
             </div>
             <div
+              class="mat-h2"
               style="
                 background-color: rgba(143, 188, 143, 0.226);
-                padding: 1em 0.5em;
+                padding: 0.55em 1em;
                 margin: 1em 0;
                 border-radius: 3px;
               "

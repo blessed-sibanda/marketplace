@@ -7,123 +7,141 @@
     fxLayoutGap="10px"
     style="margin: 0 0.75em"
   >
-    <mat-card fxFlex.gt-xs="45%" style="text-align: center">
-      <mat-card-content>
-        <h1 class="app-header text-center">Edit Shop</h1>
+    <div fxFlex.gt-xs="45%" style="text-align: center">
+      <mat-card>
+        <mat-card-content>
+          <h1 class="app-header text-center">Edit Shop</h1>
 
-        <div
-          fxLayout="row"
-          style="margin-bottom: 1.5em"
-          fxLayoutAlign="center center"
-          fxLayoutGap="10px"
-        >
-          <ngp-image-picker
-            [_config]="imagePickerConf"
-            ($imageChanged)="onImageChange($event)"
-            [_imageSrc]="shop?.imageUrl"
-          ></ngp-image-picker>
-        </div>
-        <form
-          [formGroup]="shopForm"
-          (ngSubmit)="updateShop(shopForm)"
-          fxLayout="column"
-        >
-          <div>
-            <mat-form-field fxFlex>
-              <input
-                matInput
-                placeholder="Name"
-                aria-label="Name"
-                formControlName="name"
-              />
-              <mat-error *ngIf="shopForm.get('name')?.hasError('required')">
-                Name is required
-              </mat-error>
-              <mat-error *ngIf="shopForm.get('name')?.hasError('minlength')">
-                Name should be at least 3 characters long
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div>
-            <mat-form-field fxFlex>
-              <textarea
-                matInput
-                formControlName="description"
-                placeholder="Description"
-                cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="3"
-              ></textarea>
-              <mat-error
-                *ngIf="shopForm.get('description')?.hasError('required')"
-              >
-                Description is required
-              </mat-error>
-              <mat-error
-                *ngIf="shopForm.get('description')?.hasError('minlength')"
-              >
-                Description should be at least 3 characters long
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div>
-            <p>Owner: {{ shop?.owner?.name }}</p>
-          </div>
-
-          <div fxLayout="row" fxLayoutAlign="center">
-            <button
-              mat-raised-button
-              type="submit"
-              color="primary"
-              [disabled]="shopForm.invalid"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card fxFlex.gt-xs="55%">
-      <mat-card-content>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <h1 class="app-header text-center">Products</h1>
-          <button
-            [routerLink]="'/products/' + shop._id + '/new'"
-            color="primary"
-            mat-raised-button
+          <div
+            fxLayout="row"
+            style="margin-bottom: 1.5em"
+            fxLayoutAlign="center center"
+            fxLayoutGap="10px"
           >
-            <mat-icon>add_box</mat-icon>
-            <span>New Product</span>
-          </button>
-        </div>
-        <mat-list>
-          <mat-list-item style="height: 80px" *ngFor="let product of products">
-            <img
-              mat-list-avatar
-              style="border-radius: 0; height: 70px; width: 70px"
-              [src]="
-                product.imageUrl
-                  ? product.imageUrl
-                  : '../../../assets/product4.png'
-              "
-              alt=""
-            />
-            <h3 mat-line>{{ product.name }}</h3>
-            <h4 style="color: gray" mat-line>
-              Quantity: {{ product.quantity }} | Price:
-              {{ product.price | currency }}
-            </h4>
-            <div class="flex-spacer"></div>
-            <button mat-icon-button><mat-icon>edit</mat-icon></button>
-            <button mat-icon-button color="accent">
-              <mat-icon>delete</mat-icon>
+            <ngp-image-picker
+              [_config]="imagePickerConf"
+              ($imageChanged)="onImageChange($event)"
+              [_imageSrc]="shop?.imageUrl"
+            ></ngp-image-picker>
+          </div>
+          <form
+            [formGroup]="shopForm"
+            (ngSubmit)="updateShop(shopForm)"
+            fxLayout="column"
+          >
+            <div>
+              <mat-form-field fxFlex>
+                <input
+                  matInput
+                  placeholder="Name"
+                  aria-label="Name"
+                  formControlName="name"
+                />
+                <mat-error *ngIf="shopForm.get('name')?.hasError('required')">
+                  Name is required
+                </mat-error>
+                <mat-error *ngIf="shopForm.get('name')?.hasError('minlength')">
+                  Name should be at least 3 characters long
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field fxFlex>
+                <textarea
+                  matInput
+                  formControlName="description"
+                  placeholder="Description"
+                  cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="3"
+                ></textarea>
+                <mat-error
+                  *ngIf="shopForm.get('description')?.hasError('required')"
+                >
+                  Description is required
+                </mat-error>
+                <mat-error
+                  *ngIf="shopForm.get('description')?.hasError('minlength')"
+                >
+                  Description should be at least 3 characters long
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div>
+              <p>Owner: {{ shop?.owner?.name }}</p>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="center">
+              <button
+                mat-raised-button
+                type="submit"
+                color="primary"
+                [disabled]="shopForm.invalid"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div fxFlex.gt-xs="55%">
+      <mat-card>
+        <mat-card-content>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <h1 class="app-header text-center">Products</h1>
+            <button
+              [routerLink]="'/products/' + shop._id + '/new'"
+              color="primary"
+              mat-raised-button
+            >
+              <mat-icon>add_box</mat-icon>
+              <span>New Product</span>
             </button>
-            <mat-divider></mat-divider>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-    </mat-card>
+          </div>
+          <mat-list>
+            <mat-list-item
+              style="height: 80px"
+              *ngFor="let product of products"
+            >
+              <img
+                mat-list-avatar
+                style="border-radius: 0; height: 70px; width: 70px"
+                [src]="
+                  product.imageUrl
+                    ? product.imageUrl
+                    : '../../../assets/product4.png'
+                "
+                alt=""
+              />
+              <h3
+                style="cursor: pointer"
+                [routerLink]="'/products/product/' + product._id"
+                mat-line
+              >
+                {{ product.name }}
+              </h3>
+              <h4 style="color: gray" mat-line>
+                Quantity: {{ product.quantity }} | Price:
+                {{ product.price | currency }}
+              </h4>
+              <div class="flex-spacer"></div>
+              <button
+                [routerLink]="'/products/product/' + product._id + '/edit'"
+                mat-icon-button
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="accent">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>

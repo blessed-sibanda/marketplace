@@ -16,6 +16,11 @@ export interface IProductData {
 
 interface IProductService {
   createProduct(shopId: string, data: IProductData): Observable<Product>;
+  updateProduct(
+    shopId: string,
+    productId: string,
+    data: IProductData
+  ): Observable<Product>;
   getProduct(productId: string): Observable<Product>;
   listProductsByShop(shopId: string): Observable<Product[]>;
   latestProducts(): Observable<Product[]>;
@@ -27,6 +32,27 @@ interface IProductService {
 })
 export class ProductService implements IProductService {
   constructor(private httpClient: HttpClient) {}
+
+  updateProduct(
+    shopId: string,
+    productId: string,
+    data: IProductData
+  ): Observable<Product> {
+    let formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('description', data.description);
+    formData.append('category', data.category);
+    formData.append('price', data.price.toString());
+    formData.append('quantity', data.quantity.toString());
+    data.file && formData.append('file', data.file);
+
+    return this.httpClient
+      .put<IProduct>(
+        `${environment.baseApiUrl}/products/${shopId}/product/${productId}`,
+        formData
+      )
+      .pipe(map(Product.Build), catchError(transformError));
+  }
 
   getProduct(productId: string): Observable<Product> {
     return this.httpClient
