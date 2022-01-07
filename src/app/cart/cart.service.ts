@@ -12,6 +12,7 @@ export interface ICartService {
   clearCart(): void;
   count: number;
 }
+
 @Injectable({
   providedIn: 'root',
 })
@@ -20,6 +21,7 @@ export class CartService extends CacheService implements ICartService {
 
   constructor() {
     super();
+    this.items$.next(this.getItem('cart') as ICartItem[]);
   }
 
   removeFromCart(product: Product): void {
@@ -33,7 +35,7 @@ export class CartService extends CacheService implements ICartService {
   }
 
   get count() {
-    return this.items.length;
+    return this.items.reduce((a, b) => a + b.quantity, 0);
   }
 
   decrementQuantity(product: Product, quantity: number = 1): void {

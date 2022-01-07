@@ -13,6 +13,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatBadgeModule } from '@angular/material/badge';
 
 const materialModules = [
   MatToolbarModule,
@@ -29,6 +30,7 @@ const materialModules = [
   MatGridListModule,
   MatSelectModule,
   MatTabsModule,
+  MatBadgeModule,
 ];
 
 @NgModule({

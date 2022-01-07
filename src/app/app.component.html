@@ -9,6 +9,12 @@
   <a fxHide.lt-sm mat-button routerLinkActive="active" routerLink="/shops"
     >All Shops</a
   >
+  <a fxHide.lt-sm mat-button
+    ><span>Cart</span>
+    <mat-icon [matBadge]="cartCount" matBadgeSize="small" matBadgeColor="accent"
+      >shopping_cart</mat-icon
+    >
+  </a>
 
   <span class="flex-spacer"></span>
 

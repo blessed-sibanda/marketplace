@@ -1,4 +1,5 @@
 <button
+  (click)="addToCart(product)"
   [color]="product.quantity > 0 ? 'primary' : ''"
   [disabled]="product.quantity == 0"
   mat-icon-button
