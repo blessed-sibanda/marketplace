@@ -10,9 +10,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MyShopsComponent } from './my-shops/my-shops.component';
 import { AllShopsComponent } from './all-shops/all-shops.component';
 import { ShopComponent } from './shop/shop.component';
+import { EditShopComponent } from './edit-shop/edit-shop.component';
 
 @NgModule({
-  declarations: [NewShopComponent, MyShopsComponent, AllShopsComponent, ShopComponent],
+  declarations: [NewShopComponent, MyShopsComponent, AllShopsComponent, ShopComponent, EditShopComponent],
   imports: [
     CommonModule,
     ShopsRoutingModule,

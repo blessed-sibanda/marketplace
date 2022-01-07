@@ -5,6 +5,7 @@ import { MyShopsComponent } from './my-shops/my-shops.component';
 import { NewShopComponent } from './new-shop/new-shop.component';
 import { AllShopsComponent } from './all-shops/all-shops.component';
 import { ShopComponent } from './shop/shop.component';
+import { EditShopComponent } from './edit-shop/edit-shop.component';
 
 const routes: Routes = [
   {
@@ -20,8 +21,14 @@ const routes: Routes = [
     data: { onlySeller: true },
   },
   {
-    path: 'shops/:shopId',
+    path: 'shop/:shopId',
     component: ShopComponent,
+  },
+  {
+    path: 'shop/:shopId/edit',
+    component: EditShopComponent,
+    canActivate: [AuthGuard],
+    data: { onlySeller: true },
   },
   {
     path: 'shops',

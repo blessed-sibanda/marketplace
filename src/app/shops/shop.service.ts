@@ -16,6 +16,7 @@ interface IShopService {
   listShopsByOwner(userId: string): Observable<Shop[]>;
   listShops(): Observable<Shop[]>;
   getShop(shopId: string): Observable<Shop>;
+  updateShop(shopId: string, data: IShopData): Observable<Shop>;
 }
 
 @Injectable({
@@ -23,6 +24,17 @@ interface IShopService {
 })
 export class ShopService implements IShopService {
   constructor(private httpClient: HttpClient) {}
+
+  updateShop(shopId: string, data: IShopData): Observable<Shop> {
+    let formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('description', data.description);
+    data.file && formData.append('file', data.file);
+
+    return this.httpClient
+      .put<IShop>(`${environment.baseApiUrl}/shops/${shopId}`, data)
+      .pipe(map(Shop.Build), catchError(transformError));
+  }
 
   getShop(shopId: string): Observable<Shop> {
     return this.httpClient

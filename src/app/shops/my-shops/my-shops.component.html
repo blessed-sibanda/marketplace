@@ -22,7 +22,7 @@
 
           <h4
             style="cursor: pointer"
-            [routerLink]="'/shops/' + shop._id"
+            [routerLink]="'/shop/' + shop._id"
             mat-line
           >
             {{ shop.name }}
@@ -32,10 +32,18 @@
           </h5>
 
           <div class="flex-spacer"></div>
-          <button mat-icon-button>
+          <button
+            [routerLink]="'/shop/' + shop._id + '/edit'"
+            *ngIf="shop.owner._id === currentUser._id"
+            mat-icon-button
+          >
             <mat-icon>edit</mat-icon>
           </button>
-          <button color="accent" mat-icon-button>
+          <button
+            *ngIf="shop.owner._id === currentUser._id"
+            color="accent"
+            mat-icon-button
+          >
             <mat-icon>delete</mat-icon>
           </button>
           <mat-divider inset></mat-divider>

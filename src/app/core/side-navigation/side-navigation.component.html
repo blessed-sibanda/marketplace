@@ -3,9 +3,18 @@
     <mat-icon mat-list-icon>home</mat-icon>
     <span>Home</span>
   </a>
-  <a (click)="closeMenu()" mat-list-item routerLink="/users">
-    <mat-icon mat-list-icon>people</mat-icon>
-    <span>Users</span>
+  <a (click)="closeMenu()" mat-list-item routerLink="/shops">
+    <mat-icon mat-list-icon>shop</mat-icon>
+    <span>Shops</span>
+  </a>
+  <a
+    (click)="closeMenu()"
+    *ngIf="(authService.currentUser$ | async)?.seller"
+    mat-list-item
+    routerLink="/my-shops"
+  >
+    <mat-icon mat-list-icon>shop_two</mat-icon>
+    <span>My Shops</span>
   </a>
   <a
     (click)="closeMenu()"
