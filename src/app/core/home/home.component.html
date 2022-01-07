@@ -5,8 +5,19 @@
   style="max-width: 1080px; margin: 0 auto; padding: 0 1em"
 >
   <div fxFlex.sm="60%" fxFlex.gt-sm="65%">
-    <app-search></app-search>
-    <app-product-list [products]="searchResults"></app-product-list>
+    <div
+      class="mat-elevation-z1"
+      style="
+        background-color: #b1a9b12b;
+        margin: 0;
+        padding: 1em 0 0;
+        border-radius: 0.4em;
+      "
+    >
+      <app-search></app-search>
+      <mat-divider></mat-divider>
+      <app-product-list [products]="searchResults"></app-product-list>
+    </div>
   </div>
   <div fxFlex.sm="40%" fxFlex.gt-sm="35%">
     <div

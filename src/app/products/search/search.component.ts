@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { debounceTime, tap } from 'rxjs';
+import { SubSink } from 'subsink';
 import { IProductQuery, ProductService } from '../product.service';
 
 @Component({
@@ -7,17 +9,33 @@ import { IProductQuery, ProductService } from '../product.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   searchForm!: FormGroup;
   categories: string[] = [];
+  searchBtnDisabled = true;
+  subs = new SubSink();
+
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService
   ) {}
 
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
+
   ngOnInit(): void {
     this.syncData();
     this.buildForm();
+    this.subs.sink = this.searchForm.valueChanges
+      .pipe(
+        debounceTime(100),
+        tap((v: IProductQuery) => {
+          if (v.search != '' || v.category != '')
+            this.productService.searchProducts(v).subscribe();
+        })
+      )
+      .subscribe();
   }
 
   buildForm() {
@@ -31,13 +49,5 @@ export class SearchComponent implements OnInit {
     this.productService
       .listCategories()
       .subscribe({ next: (res) => (this.categories = res) });
-  }
-
-  searchProducts(submittedForm: FormGroup) {
-    let productQuery = submittedForm.value as IProductQuery;
-    console.log(submittedForm.value);
-    this.productService.searchProducts(productQuery).subscribe({
-      next: (res) => {},
-    });
   }
 }

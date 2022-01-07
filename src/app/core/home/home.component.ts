@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { tap } from 'rxjs';
+import { combineLatest, tap } from 'rxjs';
 import { Product } from 'src/app/products/product';
-import { ProductService } from 'src/app/products/product.service';
+import {
+  IProductQuery,
+  ProductService,
+} from 'src/app/products/product.service';
 import { SubSink } from 'subsink';
 
 @Component({
@@ -13,13 +16,19 @@ export class HomeComponent implements OnInit {
   latestProducts: Product[] = [];
   searchResults: Product[] = [];
   subs = new SubSink();
+  products: Product[] = [];
+  query: IProductQuery = { search: '', category: '' };
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
     this.syncData();
-    this.subs.sink = this.productService.products$
-      .pipe(tap((p) => (this.searchResults = p)))
+    this.subs.sink = combineLatest([this.productService.products$])
+      .pipe(
+        tap(([searchResults]) => {
+          this.searchResults = searchResults;
+        })
+      )
       .subscribe();
   }
 

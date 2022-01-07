@@ -1,35 +1,24 @@
-<form
-  fxLayout="row"
-  fxLayout.lt-md="column"
-  fxLayoutAlign="start baseline"
-  fxLayoutGap="10px"
-  [formGroup]="searchForm"
-  style="
-    background-color: #b1a9b12b;
-    margin: 0 0 1em;
-    padding: 1em 1.5em;
-    border-radius: 0.4em;
-  "
->
-  <mat-form-field>
-    <mat-label>Select Category</mat-label>
-    <mat-select formControlName="category">
-      <mat-option *ngFor="let cat of categories" [value]="cat">
-        {{ cat }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field fxFlex>
-    <mat-label>Search Products</mat-label>
-    <input matInput formControlName="search" />
-  </mat-form-field>
-  <div style="margin-bottom: 0.3em">
-    <button
-      (click)="searchProducts(searchForm)"
-      mat-raised-button
-      color="primary"
-    >
-      <mat-icon>search</mat-icon>
-    </button>
-  </div>
-</form>
+<div fxLayout="row" fxLayoutAlign="center">
+  <form
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutAlign="start baseline"
+    fxLayoutGap="10px"
+    [formGroup]="searchForm"
+    fxFlex.gt-xs="400px"
+  >
+    <mat-form-field>
+      <mat-label>Select Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option value="">All</mat-option>
+        <mat-option *ngFor="let cat of categories" [value]="cat">
+          {{ cat }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex="100%">
+      <mat-label>Search Products</mat-label>
+      <input matInput formControlName="search" placeholder="Start typing.." />
+    </mat-form-field>
+  </form>
+</div>
